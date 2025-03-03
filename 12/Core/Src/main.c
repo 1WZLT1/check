@@ -42,6 +42,8 @@
 /* Private variables ---------------------------------------------------------*/
 
 UART_HandleTypeDef huart5;
+DMA_HandleTypeDef hdma_uart5_rx;
+DMA_HandleTypeDef hdma_uart5_tx;
 
 /* USER CODE BEGIN PV */
 
@@ -51,6 +53,7 @@ UART_HandleTypeDef huart5;
 void SystemClock_Config(void);
 static void MPU_Config(void);
 static void MX_GPIO_Init(void);
+static void MX_DMA_Init(void);
 static void MX_UART5_Init(void);
 /* USER CODE BEGIN PFP */
 
@@ -93,6 +96,7 @@ int main(void)
 
   /* Initialize all configured peripherals */
   MX_GPIO_Init();
+  MX_DMA_Init();
   MX_UART5_Init();
   /* USER CODE BEGIN 2 */
 
@@ -105,7 +109,7 @@ int main(void)
     /* USER CODE END WHILE */
 
     /* USER CODE BEGIN 3 */
-		HAL_UART_Transmit(&huart5, (uint8_t *)&aTxBuffer[0], 1, 0xFFFF);
+		HAL_UART_Transmit_DMA(&huart5, (uint8_t *)&aTxBuffer[3], 1);
 		HAL_Delay(1000);
 	}
   /* USER CODE END 3 */
@@ -215,6 +219,25 @@ static void MX_UART5_Init(void)
   /* USER CODE BEGIN UART5_Init 2 */
 
   /* USER CODE END UART5_Init 2 */
+
+}
+
+/**
+  * Enable DMA controller clock
+  */
+static void MX_DMA_Init(void)
+{
+
+  /* DMA controller clock enable */
+  __HAL_RCC_DMA1_CLK_ENABLE();
+
+  /* DMA interrupt init */
+  /* DMA1_Stream0_IRQn interrupt configuration */
+  HAL_NVIC_SetPriority(DMA1_Stream0_IRQn, 0, 0);
+  HAL_NVIC_EnableIRQ(DMA1_Stream0_IRQn);
+  /* DMA1_Stream1_IRQn interrupt configuration */
+  HAL_NVIC_SetPriority(DMA1_Stream1_IRQn, 0, 0);
+  HAL_NVIC_EnableIRQ(DMA1_Stream1_IRQn);
 
 }
 
