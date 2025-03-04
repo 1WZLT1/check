@@ -199,31 +199,23 @@ static void MX_FDCAN1_Init(void)
   hfdcan1.Init.AutoRetransmission = ENABLE;
   hfdcan1.Init.TransmitPause = ENABLE;
   hfdcan1.Init.ProtocolException = ENABLE;
-	
   hfdcan1.Init.NominalPrescaler = 1;
   hfdcan1.Init.NominalSyncJumpWidth = 8;
   hfdcan1.Init.NominalTimeSeg1 = 31;
   hfdcan1.Init.NominalTimeSeg2 = 8;
-	
   hfdcan1.Init.DataPrescaler = 1;
   hfdcan1.Init.DataSyncJumpWidth = 8;
   hfdcan1.Init.DataTimeSeg1 = 31;
   hfdcan1.Init.DataTimeSeg2 = 8;
-	
   hfdcan1.Init.MessageRAMOffset = 0;
-	
   hfdcan1.Init.StdFiltersNbr = 1;
   hfdcan1.Init.ExtFiltersNbr = 1;
-	
   hfdcan1.Init.RxFifo0ElmtsNbr = 1;
   hfdcan1.Init.RxFifo0ElmtSize = FDCAN_DATA_BYTES_8;
-	
   hfdcan1.Init.RxFifo1ElmtsNbr = 1;
   hfdcan1.Init.RxFifo1ElmtSize = FDCAN_DATA_BYTES_8;
-	
   hfdcan1.Init.RxBuffersNbr = 1;
   hfdcan1.Init.RxBufferSize = FDCAN_DATA_BYTES_8;
-	
   hfdcan1.Init.TxEventsNbr = 1;
   hfdcan1.Init.TxBuffersNbr = 1;
   hfdcan1.Init.TxFifoQueueElmtsNbr = 32;
